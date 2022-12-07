@@ -1,35 +1,40 @@
-import { Injectable } from '@nestjs/common';
-import { PrismaClient } from '@prisma/client';
+/* eslint-disable consistent-return */
+import { HttpStatus, Injectable } from '@nestjs/common';
+import { PrismaClient, Prisma } from '@prisma/client';
+import { handleServiceCustomErrorPrisma } from 'src/core/utils/api-client.prisma.error';
 import { ModulesPostgres } from './postgres.types';
 
 @Injectable()
 export class PostgresDbClient {
   constructor(private prismaClient: PrismaClient) {}
 
-  async create(payload: any, module: ModulesPostgres) {
+  async create(payload: any, module: ModulesPostgres): Promise<any> {
     try {
       const response = await this.prismaClient[module].create({ data: payload });
       return response;
     } catch (error) {
-      throw Error('error - create');
+      handleServiceCustomErrorPrisma(error, HttpStatus.BAD_REQUEST);
     }
   }
 
   async find<T>(payloadLocalize: T, module: ModulesPostgres) {
     try {
       const response = await this.prismaClient[module].findUnique({ where: payloadLocalize });
-      return response;
+      if (response && response !== null) {
+        return response;
+      }
+      handleServiceCustomErrorPrisma('Not Found.', HttpStatus.NOT_FOUND);
     } catch (error) {
-      throw Error('error - find');
+      handleServiceCustomErrorPrisma(error, error.status);
     }
   }
 
-  async update<T>(payload: T, localize: T, module: ModulesPostgres) {
+  async update<T, Y>(payload: T, localize: Y, module: ModulesPostgres) {
     try {
       const response = await this.prismaClient[module].update({ where: localize, data: payload });
       return response;
     } catch (error) {
-      return 'update - update';
+      handleServiceCustomErrorPrisma(error, HttpStatus.BAD_REQUEST);
     }
   }
 

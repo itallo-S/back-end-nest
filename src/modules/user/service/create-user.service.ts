@@ -8,7 +8,11 @@ export class CreateUserService {
   constructor(private userRepository: UserRepository) {}
 
   async execute(payload: CreateUserRequestModel): Promise<CreateUserResponseModel> {
-    const response = await this.userRepository.create(payload);
+    const response = await this.userRepository.create({
+      email: payload.email,
+      name: payload.name,
+      password: payload.password,
+    });
     return response;
   }
 }

@@ -13,7 +13,11 @@ import { FindUserObjectType } from './types/find-user/find-user.resolver.object-
 @ApiTags('User')
 @Controller('user')
 export class UserResolver {
-  constructor(private createUserService: CreateUserService, private findUserService: FindUserService) {}
+  constructor(
+    private createUserService: CreateUserService,
+    private findUserService: FindUserService,
+    private userRepository: UserRepository,
+  ) {}
 
   @Post()
   @ApiOperation({ summary: 'Create new user' })
@@ -24,13 +28,14 @@ export class UserResolver {
 
   @Put()
   @ApiOperation({ summary: 'Change password' })
-  async updateUser(@Body() updatePassInput: UpdatePassInput): Promise<boolean> {
-    return true;
+  async updateUser(@Query() email: FindUserInput, @Body() updatePassInput: UpdatePassInput): Promise<any> {
+    const response = await this.userRepository.changePassword(updatePassInput, email);
+    return response;
   }
 
-  @Get(':email')
+  @Get()
   @ApiOperation({ summary: 'Searching user' })
-  async searchUser(@Param() email: FindUserInput): Promise<FindUserObjectType> {
+  async searchUser(@Query() email: FindUserInput): Promise<FindUserObjectType> {
     const response = await this.findUserService.execute(email);
     return response;
   }

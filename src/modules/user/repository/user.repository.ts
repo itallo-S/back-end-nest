@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { FindUserResponseToModelMapper } from '../datasource/mapper/find-user-response-to-model.mapper';
 import { UserPostgresDbClient } from '../datasource/user.postgres.db-client';
 import { ChangePasswordRequestModel } from '../model/change-password.request.model';
+import { ChangePasswordResponseModel } from '../model/change-password.response.model';
 import { CreateUserRequestModel } from '../model/create-user-request.model';
 import { CreateUserResponseModel } from '../model/create-user-response.model';
 import { FindUserRequestModel } from '../model/find-user-request.model';
@@ -17,7 +18,7 @@ export class UserRepository {
 
   async create(payload: CreateUserRequestModel): Promise<CreateUserResponseModel> {
     await this.userPostgresDbClient.createUser(payload);
-    return { message: 'Successfully registered user!' };
+    return { message: 'Registered user successfully!' };
   }
 
   async find(payload: FindUserRequestModel): Promise<FindUserResponseModel> {
@@ -26,8 +27,11 @@ export class UserRepository {
     return userResponseToModelMapped;
   }
 
-  async changePassword(payload: ChangePasswordRequestModel, localize: LocalizeRequestModel) {
-    const response = await this.userPostgresDbClient.updateUser({ password: '123Guest' }, localize);
-    return response;
+  async changePassword(
+    payload: ChangePasswordRequestModel,
+    localize: LocalizeRequestModel,
+  ): Promise<ChangePasswordResponseModel> {
+    await this.userPostgresDbClient.updateUser(payload, localize);
+    return { message: 'Uptodated password successfully' };
   }
 }

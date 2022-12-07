@@ -1,4 +1,4 @@
 export interface ChangePasswordRequestModel {
-  confirmPass: string;
+  confirmPass?: string;
   password: string;
 }

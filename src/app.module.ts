@@ -6,6 +6,7 @@ import { UserPostgresDbClient } from './modules/user/datasource/user.postgres.db
 import { UserRepository } from './modules/user/repository/user.repository';
 import { CreateUserInput } from './modules/user/resolver/types/create-user/create-user.resolver.input-type';
 import { UserResolver } from './modules/user/resolver/user.resolver';
+import { ChangePasswordUserService } from './modules/user/service/change-password-user.service';
 import { CreateUserService } from './modules/user/service/create-user.service';
 import { FindUserService } from './modules/user/service/find-user.service';
 import { UserModule } from './modules/user/user.module';
@@ -22,6 +23,7 @@ import { UserModule } from './modules/user/user.module';
     CreateUserService,
     FindUserService,
     FindUserResponseToModelMapper,
+    ChangePasswordUserService,
   ],
 })
 export class AppModule {}

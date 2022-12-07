@@ -8,6 +8,7 @@ import { UserRepository } from './repository/user.repository';
 import { CreateUserService } from './service/create-user.service';
 import { FindUserService } from './service/find-user.service';
 import { FindUserResponseToModelMapper } from './datasource/mapper/find-user-response-to-model.mapper';
+import { ChangePasswordUserService } from './service/change-password-user.service';
 
 @Module({
   imports: [],
@@ -20,6 +21,7 @@ import { FindUserResponseToModelMapper } from './datasource/mapper/find-user-res
     CreateUserService,
     FindUserService,
     FindUserResponseToModelMapper,
+    ChangePasswordUserService,
   ],
   controllers: [UserResolver],
 })

@@ -5,11 +5,22 @@ import { CreateUserInput } from './resolver/types/create-user/create-user.resolv
 import { UserResolver } from './resolver/user.resolver';
 import { UserPostgresDbClient } from './datasource/user.postgres.db-client';
 import { UserRepository } from './repository/user.repository';
-import { UserService } from './service/user.service';
+import { CreateUserService } from './service/create-user.service';
+import { FindUserService } from './service/find-user.service';
+import { FindUserResponseToModelMapper } from './datasource/mapper/find-user-response-to-model.mapper';
 
 @Module({
   imports: [],
-  providers: [CreateUserInput, PostgresDbClient, PrismaClient, UserPostgresDbClient, UserRepository, UserService],
+  providers: [
+    CreateUserInput,
+    PostgresDbClient,
+    PrismaClient,
+    UserPostgresDbClient,
+    UserRepository,
+    CreateUserService,
+    FindUserService,
+    FindUserResponseToModelMapper,
+  ],
   controllers: [UserResolver],
 })
 export class UserModule {}

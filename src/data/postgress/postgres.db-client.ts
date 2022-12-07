@@ -20,7 +20,7 @@ export class PostgresDbClient {
       const response = await this.prismaClient[module].findUnique({ where: payloadLocalize });
       return response;
     } catch (error) {
-      return 'error - find';
+      throw Error('error - find');
     }
   }
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { FindUserResponseModel } from '../../model/find-user-response.model';
+import { FindUserResponseModel } from '../../../model/find-user-response.model';
 import { FindUserResponsePostgresDTO } from '../dto/find-user-response.postgres.dto';
 
 @Injectable()

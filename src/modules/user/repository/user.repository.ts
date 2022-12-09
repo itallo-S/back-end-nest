@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { FindUserResponseToModelMapper } from '../datasource/mapper/find-user-response-to-model.mapper';
-import { UserPostgresDbClient } from '../datasource/user.postgres.db-client';
+import { FindUserResponseToModelMapper } from '../datasource/user-postgres-client/mapper/find-user-response-to-model.mapper';
+import { UserPostgresDbClient } from '../datasource/user-postgres-client/user.postgres.db-client';
 import { ChangePasswordRequestModel } from '../model/change-password.request.model';
 import { ChangePasswordResponseModel } from '../model/change-password.response.model';
 import { CreateUserRequestModel } from '../model/create-user-request.model';

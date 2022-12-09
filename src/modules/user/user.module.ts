@@ -3,11 +3,11 @@ import { PostgresDbClient } from 'src/data/postgress/postgres.db-client';
 import { PrismaClient } from '@prisma/client';
 import { CreateUserInput } from './resolver/types/create-user/create-user.resolver.input-type';
 import { UserResolver } from './resolver/user.resolver';
-import { UserPostgresDbClient } from './datasource/user.postgres.db-client';
+import { UserPostgresDbClient } from './datasource/user-postgres-client/user.postgres.db-client';
 import { UserRepository } from './repository/user.repository';
 import { CreateUserService } from './service/create-user.service';
 import { FindUserService } from './service/find-user.service';
-import { FindUserResponseToModelMapper } from './datasource/mapper/find-user-response-to-model.mapper';
+import { FindUserResponseToModelMapper } from './datasource/user-postgres-client/mapper/find-user-response-to-model.mapper';
 import { ChangePasswordUserService } from './service/change-password-user.service';
 
 @Module({

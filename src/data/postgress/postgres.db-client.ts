@@ -1,6 +1,6 @@
 /* eslint-disable consistent-return */
 import { HttpStatus, Injectable } from '@nestjs/common';
-import { PrismaClient, Prisma } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
 import { handleServiceCustomErrorPrisma } from 'src/core/utils/api-client.prisma.error';
 import { ModulesPostgres } from './postgres.types';
 

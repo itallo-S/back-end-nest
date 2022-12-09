@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { AuthService } from 'src/modules/auth/auth.service';
+import { AuthService } from 'src/modules/auth/service/auth.service';
 import { LoginRequestPostgresModel } from '../model/login-request.model';
 import { FindUserResponseToModelMapper } from '../datasource/user-postgres-client/mapper/find-user-response-to-model.mapper';
 import { UserPostgresDbClient } from '../datasource/user-postgres-client/user.postgres.db-client';

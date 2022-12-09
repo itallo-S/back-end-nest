@@ -10,7 +10,7 @@ import { CreateUserService } from './service/create-user.service';
 import { FindUserService } from './service/find-user.service';
 import { FindUserResponseToModelMapper } from './datasource/user-postgres-client/mapper/find-user-response-to-model.mapper';
 import { ChangePasswordUserService } from './service/change-password-user.service';
-import { AuthService } from '../auth/auth.service';
+import { AuthService } from '../auth/service/auth.service';
 import { LoginResponseToModelMapper } from './datasource/user-postgres-client/mapper/login-response-to-model.mapper';
 
 @Module({

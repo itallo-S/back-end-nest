@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Post, Put, Query, UseGuards } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
-import { JwtAuthGuard } from 'src/modules/auth/jwt-auth.guard';
+import { JwtAuthGuard } from 'src/modules/auth/guard/jwt-auth.guard';
 import { UpdatePassInput } from './types/update-password-user/update-password-user.input-type';
 import { CreateUserInput } from './types/create-user/create-user.resolver.input-type';
 import { CreateUserObjectType } from './types/create-user/create-user.resolver.object-type';

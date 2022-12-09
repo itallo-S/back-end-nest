@@ -13,7 +13,7 @@ import { CreateUserService } from './modules/user/service/create-user.service';
 import { FindUserService } from './modules/user/service/find-user.service';
 import { UserModule } from './modules/user/user.module';
 import { AuthModule } from './modules/auth/auth.module';
-import { AuthService } from './modules/auth/auth.service';
+import { AuthService } from './modules/auth/service/auth.service';
 import { LoginResponseToModelMapper } from './modules/user/datasource/user-postgres-client/mapper/login-response-to-model.mapper';
 
 @Module({

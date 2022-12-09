@@ -8,7 +8,7 @@ export class AuthService {
   getTokenJWT(email: string): string {
     const payload = { email };
     const token = this.jwtService.sign(payload, {
-      expiresIn: process.env.EXPIRES_IN,
+      expiresIn: process.env.TOKEN_EXPIRES_IN,
       secret: process.env.SECRET_KEY_JWT_TOKEN,
     });
 

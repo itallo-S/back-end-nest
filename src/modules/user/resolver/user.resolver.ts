@@ -1,5 +1,6 @@
-import { Body, Controller, Get, Post, Put, Query } from '@nestjs/common';
+import { Body, Controller, Get, Post, Put, Query, UseGuards } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/modules/auth/jwt-auth.guard';
 import { UpdatePassInput } from './types/update-password-user/update-password-user.input-type';
 import { CreateUserInput } from './types/create-user/create-user.resolver.input-type';
 import { CreateUserObjectType } from './types/create-user/create-user.resolver.object-type';
@@ -20,12 +21,14 @@ export class UserResolver {
   ) {}
 
   @Post()
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Create new user' })
   async createUser(@Body() createUserInput: CreateUserInput): Promise<CreateUserObjectType> {
     const response = await this.createUserService.execute(createUserInput);
     return response;
   }
 
+  @UseGuards(JwtAuthGuard)
   @Put()
   @ApiOperation({ summary: 'Change password' })
   async updateUser(
@@ -36,9 +39,11 @@ export class UserResolver {
     return response;
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get()
   @ApiOperation({ summary: 'Searching user' })
   async searchUser(@Query() email: FindUserInput): Promise<FindUserObjectType> {
+    console.log('teste');
     const response = await this.findUserService.execute(email);
     return response;
   }

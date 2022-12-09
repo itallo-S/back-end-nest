@@ -1,6 +1,8 @@
 import { Module } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
+import { JwtService } from '@nestjs/jwt';
 import { PostgresDbClient } from './data/postgress/postgres.db-client';
+import { LoginModule } from './modules/login/login.module';
 import { FindUserResponseToModelMapper } from './modules/user/datasource/user-postgres-client/mapper/find-user-response-to-model.mapper';
 import { UserPostgresDbClient } from './modules/user/datasource/user-postgres-client/user.postgres.db-client';
 import { UserRepository } from './modules/user/repository/user.repository';
@@ -10,9 +12,12 @@ import { ChangePasswordUserService } from './modules/user/service/change-passwor
 import { CreateUserService } from './modules/user/service/create-user.service';
 import { FindUserService } from './modules/user/service/find-user.service';
 import { UserModule } from './modules/user/user.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { AuthService } from './modules/auth/auth.service';
+import { LoginResponseToModelMapper } from './modules/user/datasource/user-postgres-client/mapper/login-response-to-model.mapper';
 
 @Module({
-  imports: [UserModule],
+  imports: [UserModule, LoginModule, AuthModule],
   controllers: [UserResolver],
   providers: [
     CreateUserInput,
@@ -24,6 +29,9 @@ import { UserModule } from './modules/user/user.module';
     FindUserService,
     FindUserResponseToModelMapper,
     ChangePasswordUserService,
+    AuthService,
+    JwtService,
+    LoginResponseToModelMapper,
   ],
 })
 export class AppModule {}

@@ -1,4 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { HttpStatus, Injectable } from '@nestjs/common';
+import { handleServiceCustomErrorPrisma } from 'src/core/utils/api-client.prisma.error';
+import { encrypto } from 'src/core/utils/crypto.utils';
 import { PostgresDbClient } from 'src/data/postgress/postgres.db-client';
 import { ModulesPostgres } from 'src/data/postgress/postgres.types';
 import { ChangePasswordResponsePostgresDTO } from './dto/change-password-response.postgres.dto';
@@ -8,6 +10,7 @@ import { CreateUserResponsePostgresDTO } from './dto/create-user-response.postgr
 import { FindUserRequestPostgresDTO } from './dto/find-user-request.postgres.dto';
 import { FindUserResponsePostgresDTO } from './dto/find-user-response.postgres.dto';
 import { LocalizeRequestPostgresDTO } from './dto/localize-request.postgres.dto';
+import { SignInResponsePostgresDTO } from './dto/sign-in.response.postgres.dto';
 
 @Injectable()
 export class UserPostgresDbClient {
@@ -33,5 +36,16 @@ export class UserPostgresDbClient {
       ModulesPostgres.USER,
     );
     return response;
+  }
+
+  async signIn(credentials: SignInResponsePostgresDTO): Promise<FindUserResponsePostgresDTO> {
+    const user = await this.findUser({ email: credentials.email });
+    const password = encrypto(credentials.password);
+
+    if (password !== user.password) {
+      throw handleServiceCustomErrorPrisma('Invalid credentials!', HttpStatus.BAD_REQUEST);
+    }
+
+    return user;
   }
 }

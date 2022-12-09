@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateUserObjectType {
-  @ApiProperty({ example: 'Usuário criado com sucesso!' })
+  @ApiProperty({ example: 'Registered user successfully!' })
   message: string;
 }

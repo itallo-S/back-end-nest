@@ -17,10 +17,11 @@ export class ChangePasswordUserService {
     const passwordEncrypt = encrypto(payload.password);
     const confirmPasswordEncrypt = encrypto(payload.confirmPass);
 
-    if (passwordEncrypt === confirmPasswordEncrypt) {
-      const response = this.userRepository.changePassword({ password: passwordEncrypt }, localize);
-      return response;
+    if (passwordEncrypt !== confirmPasswordEncrypt) {
+      throw handleServiceCustomErrorPrisma('Passwords do not match', HttpStatus.BAD_REQUEST);
     }
-    throw handleServiceCustomErrorPrisma('Passwords do not match', HttpStatus.BAD_REQUEST);
+
+    const response = this.userRepository.changePassword({ password: passwordEncrypt }, localize);
+    return response;
   }
 }

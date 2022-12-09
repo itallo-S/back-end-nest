@@ -1,15 +1,14 @@
-import { Body, Controller, Get, Param, Post, Put, Query } from '@nestjs/common';
+import { Body, Controller, Get, Post, Put, Query } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
-import { UpdatePassInput } from './types/update-password.input-type';
+import { UpdatePassInput } from './types/update-password-user/update-password-user.input-type';
 import { CreateUserInput } from './types/create-user/create-user.resolver.input-type';
 import { CreateUserObjectType } from './types/create-user/create-user.resolver.object-type';
-import { UserPostgresDbClient } from '../datasource/user.postgres.db-client';
 import { CreateUserService } from '../service/create-user.service';
-import { UserRepository } from '../repository/user.repository';
 import { FindUserService } from '../service/find-user.service';
 import { FindUserInput } from './types/find-user/find-user.resolver.input-type';
 import { FindUserObjectType } from './types/find-user/find-user.resolver.object-type';
 import { ChangePasswordUserService } from '../service/change-password-user.service';
+import { UpdatePasswordUserObjectType } from './types/update-password-user/update-password-user.object-type';
 
 @ApiTags('User')
 @Controller('user')
@@ -17,20 +16,22 @@ export class UserResolver {
   constructor(
     private createUserService: CreateUserService,
     private findUserService: FindUserService,
-    private userRepository: UserRepository,
     private changePasswordUserService: ChangePasswordUserService,
   ) {}
 
   @Post()
   @ApiOperation({ summary: 'Create new user' })
   async createUser(@Body() createUserInput: CreateUserInput): Promise<CreateUserObjectType> {
-    await this.createUserService.execute(createUserInput);
-    return { message: 'aqui' };
+    const response = await this.createUserService.execute(createUserInput);
+    return response;
   }
 
   @Put()
   @ApiOperation({ summary: 'Change password' })
-  async updateUser(@Query() email: FindUserInput, @Body() updatePassInput: UpdatePassInput): Promise<any> {
+  async updateUser(
+    @Query() email: FindUserInput,
+    @Body() updatePassInput: UpdatePassInput,
+  ): Promise<UpdatePasswordUserObjectType> {
     const response = await this.changePasswordUserService.execute(updatePassInput, email);
     return response;
   }

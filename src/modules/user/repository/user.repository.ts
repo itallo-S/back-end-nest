@@ -32,6 +32,6 @@ export class UserRepository {
     localize: LocalizeRequestModel,
   ): Promise<ChangePasswordResponseModel> {
     await this.userPostgresDbClient.updateUser(payload, localize);
-    return { message: 'Uptodated password successfully' };
+    return { message: 'Updated password successfully!' };
   }
 }

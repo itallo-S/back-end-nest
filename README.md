@@ -29,20 +29,32 @@
 ## Installation
 
 ```bash
-$ npm install
+$ yarn install
 ```
+# first time running app
+```bash
+# install dependeces
+$ yarn install
 
+# run docker compose
+$ yarn docker:dev
+
+# run prisma and start project
+$ yarn start:prisma
+```
 ## Running the app
+
+
 
 ```bash
 # development
-$ npm run start
+$ yarn start
 
 # watch mode
-$ npm run start:dev
+$ yarn start:dev
 
 # production mode
-$ npm run start:prod
+$ yarn start:prod
 ```
 
 ## Test

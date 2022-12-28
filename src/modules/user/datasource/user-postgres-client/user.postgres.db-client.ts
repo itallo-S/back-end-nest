@@ -40,9 +40,8 @@ export class UserPostgresDbClient {
 
   async signIn(credentials: SignInResponsePostgresDTO): Promise<FindUserResponsePostgresDTO> {
     const user = await this.findUser({ email: credentials.email });
-    const password = encrypto(credentials.password);
 
-    if (password !== user.password) {
+    if (credentials.password !== user.password) {
       throw handleServiceCustomErrorPrisma('Invalid credentials!', HttpStatus.BAD_REQUEST);
     }
 

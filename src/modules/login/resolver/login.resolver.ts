@@ -12,7 +12,7 @@ export class LoginResolver {
   @Post()
   @ApiOperation({ summary: 'Sign In' })
   async signIn(@Body() credentials: SignInResolverInputType): Promise<SignInResolverObjectType> {
-    const teste = await this.loginService.execute(credentials);
-    return teste;
+    const logIn = await this.loginService.execute(credentials);
+    return logIn;
   }
 }

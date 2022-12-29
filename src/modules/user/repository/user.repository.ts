@@ -12,6 +12,7 @@ import { FindUserResponseModel } from '../model/find-user-response.model';
 import { LocalizeRequestModel } from '../model/localize-request.model';
 import { LoginResponsePostgresModel } from '../model/login-response.model';
 import { LoginResponseToModelMapper } from '../datasource/user-postgres-client/mapper/login-response-to-model.mapper';
+import { messagePtBr } from 'src/core/localized/message.pt-br';
 
 @Injectable()
 export class UserRepository {
@@ -24,7 +25,7 @@ export class UserRepository {
 
   async create(payload: CreateUserRequestModel): Promise<CreateUserResponseModel> {
     await this.userPostgresDbClient.createUser(payload);
-    return { message: 'Registered user successfully!' };
+    return { message: messagePtBr.user.create_user_successfully };
   }
 
   async find(payload: FindUserRequestModel): Promise<FindUserResponseModel> {
@@ -38,7 +39,7 @@ export class UserRepository {
     localize: LocalizeRequestModel,
   ): Promise<ChangePasswordResponseModel> {
     await this.userPostgresDbClient.updateUser(payload, localize);
-    return { message: 'Updated password successfully!' };
+    return { message: messagePtBr.user.updated_user_successfully };
   }
 
   async login(payload: LoginRequestPostgresModel): Promise<LoginResponsePostgresModel> {

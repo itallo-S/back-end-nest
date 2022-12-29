@@ -1,4 +1,6 @@
-import { HttpStatus, Injectable } from '@nestjs/common';
+import { HttpStatus, Injectable, Logger } from '@nestjs/common';
+import { handleServiceCustomError } from 'src/core/error/handle-service-custom.error';
+import { messagePtBr } from 'src/core/localized/message.pt-br';
 import { handleServiceCustomErrorPrisma } from 'src/core/utils/api-client.prisma.error';
 import { encrypto } from 'src/core/utils/crypto.utils';
 import { PostgresDbClient } from 'src/data/postgress/postgres.db-client';
@@ -17,34 +19,54 @@ export class UserPostgresDbClient {
   constructor(private postgresDbClient: PostgresDbClient) {}
 
   async createUser(payload: CreateUserRequestPostgresDTO): Promise<CreateUserResponsePostgresDTO> {
-    const response: CreateUserResponsePostgresDTO = await this.postgresDbClient.create(payload, ModulesPostgres.USER);
-    return response;
+    try {
+      const response: CreateUserResponsePostgresDTO = await this.postgresDbClient.create(payload, ModulesPostgres.USER);
+      return response;
+    } catch (error) {
+      Logger.error(error.response)
+      handleServiceCustomError(messagePtBr.user.not_possible_to_create_user, HttpStatus.BAD_REQUEST);
+    }
   }
 
   async findUser(payload: FindUserRequestPostgresDTO): Promise<FindUserResponsePostgresDTO> {
-    const response: FindUserResponsePostgresDTO = await this.postgresDbClient.find(payload, ModulesPostgres.USER);
-    return response;
+    try {
+      const response: FindUserResponsePostgresDTO = await this.postgresDbClient.find(payload, ModulesPostgres.USER);
+      return response;
+    } catch (error) {
+      Logger.error(error.response)
+      handleServiceCustomError(messagePtBr.user.not_found_user, HttpStatus.BAD_REQUEST);
+    }
   }
 
   async updateUser(
     payload: ChangePasswordRequestPostgresDTO,
     localize: LocalizeRequestPostgresDTO,
   ): Promise<ChangePasswordResponsePostgresDTO> {
-    const response: ChangePasswordResponsePostgresDTO = await this.postgresDbClient.update(
-      payload,
-      localize,
-      ModulesPostgres.USER,
-    );
-    return response;
+    try {
+      const response: ChangePasswordResponsePostgresDTO = await this.postgresDbClient.update(
+        payload,
+        localize,
+        ModulesPostgres.USER,
+      );
+      return response;
+    } catch (error) {
+      Logger.error(error.response)
+      handleServiceCustomError(messagePtBr.not_possible_updated, HttpStatus.BAD_REQUEST);
+    }
   }
 
   async signIn(credentials: SignInResponsePostgresDTO): Promise<FindUserResponsePostgresDTO> {
-    const user = await this.findUser({ email: credentials.email });
+    try {
+      const user = await this.findUser({ email: credentials.email });
 
-    if (credentials.password !== user.password) {
-      throw handleServiceCustomErrorPrisma('Invalid credentials!', HttpStatus.BAD_REQUEST);
+      if (credentials.password !== user.password) {
+        throw handleServiceCustomError(messagePtBr.user.could_not_sign_in, HttpStatus.BAD_REQUEST);
+      }
+
+      return user;
+    } catch (error) {
+      Logger.error(error.response)
+      throw handleServiceCustomError(messagePtBr.user.could_not_sign_in, HttpStatus.BAD_REQUEST);
     }
-
-    return user;
   }
 }

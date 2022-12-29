@@ -1,5 +1,10 @@
 version: '3.8'
 services:
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
   db:
     image: postgres:14.1-alpine
     restart: always

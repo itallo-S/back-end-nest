@@ -21,7 +21,6 @@ export class UserResolver {
   ) {}
 
   @Post()
-  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Create new user' })
   async createUser(@Body() createUserInput: CreateUserInput): Promise<CreateUserObjectType> {
     const response = await this.createUserService.execute(createUserInput);

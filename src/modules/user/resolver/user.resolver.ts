@@ -27,8 +27,8 @@ export class UserResolver {
     return response;
   }
 
-  @UseGuards(JwtAuthGuard)
   @Put()
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Change password' })
   async updateUser(
     @Query() email: FindUserInput,
@@ -38,11 +38,10 @@ export class UserResolver {
     return response;
   }
 
-  @UseGuards(JwtAuthGuard)
   @Get()
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Searching user' })
   async searchUser(@Query() email: FindUserInput): Promise<FindUserObjectType> {
-    console.log('teste');
     const response = await this.findUserService.execute(email);
     return response;
   }

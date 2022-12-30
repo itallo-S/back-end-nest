@@ -6,6 +6,7 @@ import { FindUserResponsePostgresDTO } from '../dto/find-user-response.postgres.
 export class FindUserResponseToModelMapper {
   map(payload: FindUserResponsePostgresDTO): FindUserResponseModel {
     return {
+      id: payload.id,
       name: payload.name,
       email: payload.email,
       password: payload.password,

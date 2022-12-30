@@ -15,9 +15,10 @@ import { UserModule } from './modules/user/user.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { AuthService } from './modules/auth/service/auth.service';
 import { LoginResponseToModelMapper } from './modules/user/datasource/user-postgres-client/mapper/login-response-to-model.mapper';
+import { TransactionModule } from './modules/transaction/transaction.module';
 
 @Module({
-  imports: [UserModule, LoginModule, AuthModule],
+  imports: [UserModule, LoginModule, AuthModule, TransactionModule],
   controllers: [UserResolver],
   providers: [
     CreateUserInput,

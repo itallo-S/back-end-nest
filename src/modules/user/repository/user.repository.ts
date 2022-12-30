@@ -44,7 +44,7 @@ export class UserRepository {
 
   async login(payload: LoginRequestPostgresModel): Promise<LoginResponsePostgresModel> {
     const user = await this.userPostgresDbClient.signIn(payload);
-    const tokenJwt = this.authService.getTokenJWT(user.email);
+    const tokenJwt = this.authService.getTokenJWT(user.email, user.id);
     const logginMapped = this.loginResponseToModelMapper.map(user, tokenJwt);
 
     return logginMapped;

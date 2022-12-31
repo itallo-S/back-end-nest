@@ -1,7 +1,6 @@
 import { Body, Controller, Delete, Get, Headers, Param, Post, Put, UseGuards } from "@nestjs/common";
 import { ApiOperation, ApiTags } from "@nestjs/swagger";
 import { JwtAuthGuard } from "src/modules/auth/guard/jwt-auth.guard";
-import { TransactionPostgresDbClient } from "../datasource/transaction-postgres-client/transaction.postgres.db-client";
 import { CreateTransactionService } from "../service/create-transaction.service";
 import { DeleteTransactionService } from "../service/delete-transaction.service";
 import { ListTransactionService } from "../service/list-transaction.service";

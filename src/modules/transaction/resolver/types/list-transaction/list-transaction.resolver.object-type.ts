@@ -3,8 +3,8 @@ export interface ListTransactionResolverObjectType {
   type: string;
   name: string;
   value: number;
-  createAt: Date;
-  updateAt: Date;
+  createAt: string;
+  updateAt: string;
   category: string;
   description: string;
 }

@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Headers, Post, UseGuards } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Headers, Param, Post, Put, UseGuards } from "@nestjs/common";
 import { ApiOperation, ApiTags } from "@nestjs/swagger";
 import { JwtAuthGuard } from "src/modules/auth/guard/jwt-auth.guard";
 import { TransactionPostgresDbClient } from "../datasource/transaction-postgres-client/transaction.postgres.db-client";
@@ -15,15 +15,32 @@ export class TransactionResolver {
   @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Create new transaction' })
   async createTransaction(@Body() createTransaction: CreateTransactionInputType, @Headers('authorization') token): Promise<any> {
-    const transaction = await this.transactionPostgresDbClient.createTransaction(createTransaction, token )
-    return transaction
+    const response = await this.transactionPostgresDbClient.createTransaction(createTransaction, token );
+    return response;
   }
 
   @Get()
   @UseGuards(JwtAuthGuard)
-  @ApiOperation({ summary: 'Create new transaction' })
+  @ApiOperation({ summary: 'List transactions' })
   async listTransactions(@Headers('authorization') token): Promise<any> {
-    const testeGet = await this.transactionPostgresDbClient.findUserTransactions(token)
-    return testeGet
+    const response = await this.transactionPostgresDbClient.findUserTransactions(token);
+    return response;
+  }
+
+  @Put(':id')
+  @UseGuards(JwtAuthGuard)
+  @ApiOperation({ summary: 'Update transaction' })
+  async updateTransaction(@Param('id') transactionId: number, @Body() payload, @Headers('authorization') token: string): Promise<any> {
+
+    const response = await this.transactionPostgresDbClient.updateTransaction(payload, transactionId);
+    return response;
+  }
+
+  @Delete(':id')
+  @UseGuards(JwtAuthGuard)
+  @ApiOperation({ summary: 'Delete transaction' })
+  async deleteTransaction(@Param('id') transactionId: number): Promise<any> {
+    const response = await this.transactionPostgresDbClient.deleteTransaction(transactionId);
+    return response;
   }
 }

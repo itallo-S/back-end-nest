@@ -1,4 +1,4 @@
-export interface CreateTransactionRequestPostgresDTO {
+export interface TransactionRequestPostgresDTO {
   type: string;
   name: string;
   value: number;

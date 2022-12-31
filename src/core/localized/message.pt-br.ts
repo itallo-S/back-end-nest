@@ -13,8 +13,11 @@ export const messagePtBr = {
     not_possible_to_create_user: `${CommonErrors.NOT_POSSIBLE} cadastrar o usuário. ${CommonErrors.TRY_AGAIN_LATER}.`,
   },
   transaction: {
+    not_found_any_transaction: `Nenhuma transação encontrada.`,
+    deleted_transaction_successfully: `Transação apagada ${CommonErrors.SUCCESSFULLY}.`,
+    created_transaction_successfully: `Transação cadastrada ${CommonErrors.SUCCESSFULLY}.`,
+    updated_transaction_successfully: `Transação atualizada ${CommonErrors.SUCCESSFULLY}.`,
     not_possible_to_create_transaction: `${CommonErrors.NOT_POSSIBLE} cadastrar a transação. ${CommonErrors.TRY_AGAIN_LATER}.`,
-    not_found_any_transaction: `Nenhuma transação encontrada.`
   },
   not_possible_updated: `${CommonErrors.NOT_POSSIBLE} atualizar os dados.`,
   genericError: 'Desculpe-nos, ocorreu um erro e não foi possível atender sua solicitação. Por favor, tente novamente mais tarde'

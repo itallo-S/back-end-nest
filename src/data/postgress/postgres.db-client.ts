@@ -31,7 +31,7 @@ export class PostgresDbClient {
 
   async list<T>(payloadLocalize: T, module: string): Promise<any> {
     try {
-      const response = await this.prismaClient.transaction.findMany({ where: payloadLocalize });
+      const response = await this.prismaClient.transaction.findMany({ where: payloadLocalize, orderBy: { createAt: 'desc'}  });
       if (response && response !== null) {
         return response;
       }

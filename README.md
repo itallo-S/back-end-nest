@@ -40,3 +40,22 @@ $ yarn start:prod
 $ http://localhost:3000/api
 
 ```
+
+## .ENV
+```bash
+The env file must contain the variables
+
+# DATABASE
+$ DATABASE_URL = <url>
+
+# JWT
+$ CRYPTO_SECRET_KEY = <secret>
+$ SECRET_KEY_JWT_TOKEN = <secret>
+$ TOKEN_EXPIRES_IN = <time>
+
+# NEW REALIC
+$ APP_NAME_NEW_RELIC = <name>
+$ LICENSE_KEY_NEW_RELIC = <key>
+
+```
+

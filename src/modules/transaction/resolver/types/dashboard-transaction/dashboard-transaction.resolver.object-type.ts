@@ -4,7 +4,7 @@ interface Transaction {
   category: string;
   createAt: string;
 }
-export interface DashTransactionModel {
+export interface DashTransactionResolverObjectType {
   OUTPUT: Transaction[];
   INPUT: Transaction[];
 }

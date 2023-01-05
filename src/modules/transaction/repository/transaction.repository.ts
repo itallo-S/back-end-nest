@@ -4,7 +4,7 @@ import { DashboardTransactionResponseToModelMapper } from "../datasource/transac
 import { ListTransactionResponseToModelMapper } from "../datasource/transaction-postgres-client/mapper/list-transaction-response-to-model.mapper";
 import { TransactionPostgresDbClient } from "../datasource/transaction-postgres-client/transaction.postgres.db-client";
 import { CreateTransactionResponseModel } from "../model/create-transaction.response.model";
-import { DashboardTransactionResponseModel } from "../model/dashboard-transaction.response.model";
+import { DashTransactionModel } from "../model/dashboard-transaction.response.model";
 import { DeleteTransactionResponseModel } from "../model/delete-transaction.response.model";
 import { TransactionRequestModel } from "../model/transaction.request.model";
 import { TransactionResponseModel } from "../model/transaction.response.model";
@@ -39,7 +39,7 @@ export class TransactionRepository {
     return {message: messagePtBr.transaction.deleted_transaction_successfully}
   }
 
-  async dashboardTransaction(token: string): Promise<any> {
+  async dashboardTransaction(token: string): Promise<DashTransactionModel> {
     const response = await this.listTransaction(token);
     const responseToModelMapped = this.dashboardTransactionResponseToModelMapper.map(response);
 

@@ -8,6 +8,7 @@ import { ListTransactionService } from "../service/list-transaction.service";
 import { UpdateTransactionService } from "../service/update-transaction.service";
 import { CreateTransactionInputType } from "./types/create-transaction/create-transaction.resolver.input-type";
 import { CreateTransactionObjectType } from "./types/create-transaction/create-transaction.resolver.object.type";
+import { DashTransactionResolverObjectType } from "./types/dashboard-transaction/dashboard-transaction.resolver.object-type";
 import { DeleteTransactionResolverObjectType } from "./types/delete-transaction/delete-transaction.resolver.object-type";
 import { ListTransactionResolverObjectType } from "./types/list-transaction/list-transaction.resolver.object-type";
 import { UpdateTransactionInputType } from "./types/update-transaction/update-transaction.resolver.input-type";
@@ -44,7 +45,7 @@ export class TransactionResolver {
   @Get('/dashboard')
   @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'List transactions' })
-  async dashboardTransaction(@Headers('authorization') token: string): Promise<ListTransactionResolverObjectType[]> {
+  async dashboardTransaction(@Headers('authorization') token: string): Promise<DashTransactionResolverObjectType> {
     const response = await this.dashboardTransactionService.execute(token);
     return response;
   }

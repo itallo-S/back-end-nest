@@ -43,7 +43,7 @@ $ http://localhost:3000/api
 
 ## .ENV
 ```bash
-The env file must contain the variables
+The env file must contain the following variables
 
 # DATABASE
 $ DATABASE_URL = <url>

@@ -11,6 +11,11 @@ async function bootstrap() {
     .setTitle('Enterprise Building')
     .setDescription("The Enterprise Building it's a simple CRUD project.")
     .setVersion('1.0')
+    .addBearerAuth({
+      type:"http",
+      scheme:'Bearer',
+      bearerFormat:'JWT',
+      } ,'Authorization')
     .build();
 
   const document = SwaggerModule.createDocument(app, config);

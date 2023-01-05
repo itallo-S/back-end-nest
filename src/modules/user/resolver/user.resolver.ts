@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Post, Put, Query, UseGuards } from '@nestjs/common';
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/modules/auth/guard/jwt-auth.guard';
 import { UpdatePassInput } from './types/update-password-user/update-password-user.input-type';
 import { CreateUserInput } from './types/create-user/create-user.resolver.input-type';
@@ -12,6 +12,7 @@ import { ChangePasswordUserService } from '../service/change-password-user.servi
 import { UpdatePasswordUserObjectType } from './types/update-password-user/update-password-user.object-type';
 
 @ApiTags('User')
+@ApiBearerAuth('Authorization')
 @Controller('user')
 export class UserResolver {
   constructor(

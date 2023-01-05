@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, Headers, Param, Post, Put, UseGuards } from "@nestjs/common";
-import { ApiOperation, ApiTags } from "@nestjs/swagger";
+import { ApiBearerAuth, ApiOperation, ApiTags } from "@nestjs/swagger";
 import { JwtAuthGuard } from "src/modules/auth/guard/jwt-auth.guard";
 import { CreateTransactionService } from "../service/create-transaction.service";
 import { DashboardTransactionService } from "../service/dashboard-transaction.service";
@@ -15,6 +15,7 @@ import { UpdateTransactionInputType } from "./types/update-transaction/update-tr
 import { UpdateTransactionObjectType } from "./types/update-transaction/update-transaction.resolver.object.type";
 
 @ApiTags('Transaction')
+@ApiBearerAuth('Authorization')
 @Controller('transaction')
 export class TransactionResolver {
 

@@ -8,6 +8,6 @@ export class SignInResolverInputType {
   email: string;
 
   @IsNotEmpty()
-  @ApiProperty({ example: '@213$mario' })
+  @ApiProperty({ example: '213$mario' })
   password: string;
 }
